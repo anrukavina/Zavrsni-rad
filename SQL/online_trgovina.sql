@@ -1,6 +1,6 @@
 # baza podataka za online trgovinu
 # naredba za izvođenje:
-# C:\xampp\mysql\bin\mysql -uroot < --default_character_set=utf8 C:\Users\antun\OneDrive\Dokumenti\GitHub\Zavrsni-rad\SQL\online_trgovina.sql
+# C:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < C:\Users\antun\OneDrive\Dokumenti\GitHub\Zavrsni-rad\SQL\online_trgovina.sql
 
 drop database if exists online_trgovina;
 create database online_trgovina default charset utf8mb4;
@@ -36,7 +36,14 @@ create table narudzba (
 );
 
 create table stavke (
-    sifra int not null primary key auto_increment,
+    sifra    int not null primary key auto_increment,
     proizvod int not null,
+    narudzba int not null,
     kolicina int
 );
+
+# definiranje vanjskih ključeva
+
+alter table narudzba add foreign key (korisnik) references korisnik(sifra);
+alter table stavke add foreign key (narudzba) references narudzba(sifra);
+alter table stavke add foreign key (proizvod) references proizvod(sifra);
