@@ -7,15 +7,19 @@ create database online_trgovina default charset utf8mb4;
 use online_trgovina;
 
 create table korisnik (
-    sifra         int not null primary key auto_increment,
-    ime           varchar(50) not null,
-    prezime       varchar(50) not null,
-    oib           char(11),
-    adresa        varchar(50),
-    email         varchar(100),
-    datum_rodenja datetime,
-    broj_telefona varchar(50),
-    spol          varchar(20)
+    sifra          int not null primary key auto_increment,
+    ime            varchar(50) not null,
+    prezime        varchar(50) not null,
+    oib            char(11),
+    drzava         varchar(50),
+    grad           varchar(50),
+    postanski_broj varchar(10),
+    ulica          varchar(50),
+    kucni_broj     varchar(10),
+    email          varchar(100),
+    datum_rodenja  datetime,
+    broj_telefona  varchar(50),
+    spol           varchar(20)
 );
 
 create table proizvod (
@@ -47,3 +51,7 @@ create table stavke (
 alter table narudzba add foreign key (korisnik) references korisnik(sifra);
 alter table stavke add foreign key (narudzba) references narudzba(sifra);
 alter table stavke add foreign key (proizvod) references proizvod(sifra);
+
+# unos podataka
+
+
