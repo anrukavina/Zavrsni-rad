@@ -54,4 +54,13 @@ alter table stavke add foreign key (proizvod) references proizvod(sifra);
 
 # unos podataka
 
+# unos podataka u tablicu 'korisnik'
+
+insert into korisnik (ime,prezime,oib,drzava,grad,postanski_broj,ulica,kucni_broj,email,datum_rodenja,broj_telefona,spol)
+values 
+('Anđel','Čindrak',61428986609,'Hrvatska','Osijek','31000','Vukovarska','20A','andel.cindrak@hotmail.com','1989-04-16','+385957654321','musko'),
+('Ivan','Okun',57729164867,'Hrvatska','Zagreb','10000','Dolac','9','ivan.okun@gmail.com','1969-10-22','+385915335353','musko'),
+('Ketrin','Širanović',58187045372,'Hrvatska','Požega','34000','Antuna Mihanovića','10','ketrin.siranovic@gmail.com','1995-01-01','+385971234567','zensko');
+
+# unos podataka u tablicu 'proizvod'
 
