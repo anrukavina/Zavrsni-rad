@@ -77,3 +77,11 @@ values
 (100,'2022-01-05','2022-01-10',1),
 (101,'2022-03-21','2022-03-26',2),
 (102,'2022-04-10','2022-04-19',3);
+
+# unos podataka u tablicu 'stavke'
+
+insert into stavke (proizvod,narudzba,kolicina)
+values
+(2,3,3),
+(3,1,2),
+(1,2,1);
