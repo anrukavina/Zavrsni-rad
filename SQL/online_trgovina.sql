@@ -64,3 +64,8 @@ values
 
 # unos podataka u tablicu 'proizvod'
 
+insert into proizvod (naziv,vrsta,cijena,boja,tezina)
+values
+('ASUS G15DK','Stolno računalo','12229','crna','11'),
+('Lenovo IdeaPad 5 Pro','Prijenosno računalo','6699','siva','1.9'),
+('Apple iPhone 13 Pro','Smartphone','10499','siva','0.204');
