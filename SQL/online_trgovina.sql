@@ -69,3 +69,11 @@ values
 ('ASUS G15DK','Stolno računalo','12229','crna','11'),
 ('Lenovo IdeaPad 5 Pro','Prijenosno računalo','6699','siva','1.9'),
 ('Apple iPhone 13 Pro','Smartphone','10499','siva','0.204');
+
+# unos podataka u tablicu 'narudzba'
+
+insert into narudzba (broj_pracenja,datum_narudzbe,datum_isporuke,korisnik)
+values
+(100,'2022-01-05','2022-01-10',1),
+(101,'2022-03-21','2022-03-26',2),
+(102,'2022-04-10','2022-04-19',3);
