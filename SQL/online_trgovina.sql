@@ -23,17 +23,24 @@ create table korisnik (
 );
 
 create table proizvod (
-    sifra  int not null primary key auto_increment,
-    naziv  varchar(50),
-    vrsta  varchar(50),
-    cijena decimal(18,2),
-    boja   varchar(50),
-    tezina decimal(18,2)
+    sifra      int not null primary key auto_increment,
+    naziv      varchar(50) not null,
+    vrsta      varchar(50),
+    cijena     decimal(18,2),
+    boja       varchar(50),
+    tezina     decimal(18,2),
+    kategorija int
+);
+
+create table kategorija (
+    sifra int not null primary key auto_increment,
+    naziv varchar(50) not null,
+    opis  text
 );
 
 create table narudzba (
     sifra          int not null primary key auto_increment,
-    broj_pracenja  int,
+    broj_pracenja  int not null,
     datum_narudzbe datetime,
     datum_isporuke datetime,
     korisnik       int not null
@@ -51,6 +58,7 @@ create table stavke (
 alter table narudzba add foreign key (korisnik) references korisnik(sifra);
 alter table stavke add foreign key (narudzba) references narudzba(sifra);
 alter table stavke add foreign key (proizvod) references proizvod(sifra);
+alter table proizvod add foreign key (kategorija) references kategorija(sifra);
 
 # unos podataka
 
