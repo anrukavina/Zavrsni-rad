@@ -93,3 +93,16 @@ values
 (2,3,3),
 (3,1,2),
 (1,2,1);
+
+# unos podataka u tablicu 'kategorija'
+
+insert into kategorija (naziv,opis)
+values ('Stolna računala','Stolno računalo ili PC (Personal computer) je računalo koje je namijenjeno korištenju samo jednoj osobi istovremeno. Stolna računala se mogu koristiti za više operacija ovisno o korisniku, od jednostavnijih kao što su surfanje internetom i uživanje u multimedijskim sadržajima, do onih zahtjevnijih kao što su pokretanje najnovijih video-igara i profesionalne video i grafičke obrade.'),
+('Prijenosna računala','Prijenosno računalo nudi sve funkcije stolnog računala, uz dodatak prenosivosti i kompaktnosti. Time je korisnicima omogućeno korištenje funkcija računala bilo gdje - u uredu, kod kuće na trosjedu, na terasi, i slično.'),
+('Mobiteli','Mobitel je uređaj koji u svakom trenutku omogućuje pristup porukama, slikama, dokumentima, društvenim mrežama, igrama i raznim drugim funkcionalnostima i sve to samo na dodir prsta.');
+
+# update podataka tablice 'proizvod'
+
+update proizvod set kategorija=1 where sifra=1;
+update proizvod set kategorija=2 where sifra=2;
+update proizvod set kategorija=3 where sifra=3;
