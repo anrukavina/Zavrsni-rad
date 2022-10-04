@@ -34,4 +34,16 @@ class App
             echo 'Ne postoji ' . $klasa . '-&gt;' . $metoda;
         }
     }
+
+    public static function config($kljuc)
+    {
+        $configFile = BP_APP . 'konfiguracija.php';
+        $config = require $configFile;
+
+        if(isset($config[$kljuc])){
+            return $config[$kljuc];
+        } else{
+            return 'Ključ ' . $kljuc . ' ne postoji u datoteci ' . $configFile; 
+        }
+    }
 }

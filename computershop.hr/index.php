@@ -6,9 +6,9 @@ define ('BP',__DIR__ . DIRECTORY_SEPARATOR);
 define('BP_APP', BP . 'app' . DIRECTORY_SEPARATOR);
 
 $zaAutoLoad = [
+    BP_APP . 'core',
     BP_APP . 'controller',
-    BP_APP . 'model',
-    BP_APP . 'core'
+    BP_APP . 'model'
 ];
 
 $putanje = implode(PATH_SEPARATOR,$zaAutoLoad);
