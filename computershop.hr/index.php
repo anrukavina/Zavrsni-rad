@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 // echo __DIR__;  Rezultat: C:\Users\antun\OneDrive\Dokumenti\GitHub\Zavrsni-rad\mojapp.hr 
 
 define ('BP',__DIR__ . DIRECTORY_SEPARATOR);
