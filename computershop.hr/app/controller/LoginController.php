@@ -7,7 +7,7 @@ class LoginController extends Controller
        /*  $this->view->render('prijava',[
             'poruka'=>'Popunite tražene podatke'
         ]); */
-        $this->prijavaView('operater@edunova.hr','Popunite tražene podatke');
+        $this->prijavaView('operater@computershop.hr','Popunite tražene podatke');
     }
 
     public function autorizacija()
@@ -34,15 +34,15 @@ class LoginController extends Controller
         }
 
         // Ovdje je sigurno da su postavljeni email i lozinka
-        
-        if($_POST['email']!=='operater@edunova.hr' || $_POST['password']!=='operater'){
-            $this->prijavaView($_POST['email'],'Email i lozinka neispravni');
-            return;
-        }
+        $operater = Operater::autoriziraj($_POST['email'],$_POST['password']);
+        if($operater==null){
+            $this->prijavaView($_POST['email'],'Email i/ili lozinka neispravni');
+             return;
+        }    
 
-        // Sada ide spajanje na bazu
 
-        $_SESSION['autoriziran'] = $_POST['email'];
+        // Ovdje sam siguran da si i autoriziran
+        $_SESSION['autoriziran'] = $operater;
         //$nadzornaPloca = new NadzornaplocaController();
         //$nadzornaPloca->index();
         // Ovo radimo umjesto instance klase nadzorne ploce kao gore, da nam u url-u ne bi prikazivalo autorizacija, nego nadzorna ploca
