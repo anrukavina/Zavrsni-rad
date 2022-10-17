@@ -27,9 +27,21 @@ class App
 
         // Log::log($metoda);
 
+        $parametar = '';
+        if(!isset($dijelovi[3]) || $dijelovi[3] === ''){
+            $parametar = '';
+        } else {
+            $parametar = $dijelovi[3];
+        }
+
         if(class_exists($klasa) && method_exists($klasa,$metoda)){
             $instanca = new $klasa();
-            $instanca->$metoda();
+            if(strlen($parametar)>0){
+                $instanca->$metoda($parametar);
+            } else{
+                $instanca->$metoda();
+            }
+            
         } else {
             //echo 'Ne postoji ' . $klasa . '-&gt;' . $metoda;
             $view = new View();

@@ -1,0 +1,36 @@
+<a href="<?=App::config('url')?>proizvod/novi" class="success button expanded">Dodaj novi proizvod</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Vrsta</th>
+            <th>Cijena</th>
+            <th>Boja</th>
+            <th>Tezina</th>
+            <th>Kategorija</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($entiteti as $e): ?>
+        <tr>
+            <td><?=$e->naziv?></td>
+            <td><?=$e->vrsta?></td>
+            <td><?=$e->cijena?></td>
+            <td><?=$e->boja?></td>
+            <td><?=$e->tezina?></td>
+            <td><?=$e->kategorija?></td>
+            <td>
+                    <a href="<?=App::config('url')?>proizvod/promjena/<?=$e->sifra?>">
+                        <i style="color: blue;" class="fi-page-edit"></i>
+                    </a>
+                    &nbsp;&nbsp;
+                    <a href="<?=App::config('url')?>proizvod/brisanje/<?=$e->sifra?>"
+                    onclick="return confirm('Sigurno želite obrisati kategoriju <?=$e->naziv?>'">
+                        <i style="color: red;" class="fi-page-delete"></i>
+                    </a>
+                </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

@@ -1,1 +1,8 @@
-&copy; <?php echo App::config('nazivApp');
+<div <?php 
+if(App::config('dev')){
+    echo 'style="background-color: red;"';
+}
+?> >
+    
+    &copy; <?php echo App::config('nazivApp'); ?>
+</div>

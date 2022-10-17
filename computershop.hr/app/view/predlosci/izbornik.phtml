@@ -11,6 +11,15 @@
       <li><a href="<?= App::config('url') ?>">Početna</a></li>
       <?php if(App::auth()): ?>
         <li><a href="<?=App::config('url') ?>nadzornaploca">Nadzorna ploča</a></li>
+        <li>
+          <a href="#">Programi</a>
+          <ul class="vertical menu">
+            <li><a href="<?=App::config('url') ?>korisnik">Korisnici</a></li>
+            <li><a href="<?=App::config('url') ?>proizvod">Proizvodi</a></li>
+            <li><a href="<?=App::config('url') ?>kategorija">Kategorije</a></li>
+            <li><a href="<?=App::config('url') ?>narudzba">Narudzbe</a></li>
+          </ul>
+        </li>
       <?php endif; ?>
     </ul>
   </div>

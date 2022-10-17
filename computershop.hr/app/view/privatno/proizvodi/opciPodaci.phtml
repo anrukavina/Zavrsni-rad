@@ -1,0 +1,26 @@
+<label for="naziv">Naziv</label>
+<input type="text" name="naziv" id="naziv" value="<?=$e->naziv?>">
+
+<label for="kategorija">Kategorija</label>
+<select name="kategorija" id="kategorija">
+    <?php foreach($kategorija as $k): ?>
+        <option
+        <?php if ($e->kategorija==$k->sifra){
+            echo ' selected="selected"';
+        }
+        ?>
+        value="<?=$k->sifra?>"><?=$k->naziv?></option>
+    <?php endforeach; ?>
+</select>
+
+<label for="vrsta">Naziv</label>
+<input type="text" name="vrsta" id="vrsta" value="<?=$e->vrsta?>">
+
+<label for="cijena">Cijena</label>
+<input type="text" name="cijena" id="cijena" value="<?=$e->cijena?>">
+
+<label for="boja">Boja</label>
+<input type="text" name="boja" id="boja" value="<?=$e->boja?>">
+
+<label for="tezina">Tezina</label>
+<input type="text" name="tezina" id="tezina" value="<?=$e->tezina?>">

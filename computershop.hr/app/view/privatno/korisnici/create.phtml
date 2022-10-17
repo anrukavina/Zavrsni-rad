@@ -1,0 +1,50 @@
+<form method="post" action="<?=App::config('url')?>korisnik/novi">
+    <h4 class="text-center">Dodavanje novog korisnika</h4>
+    <label>Ime
+        <input type="text" name="ime" value="<?=$korisnik->ime?>">
+    </label>
+    <label>Prezime
+        <input type="text" name="prezime" value="<?=$korisnik->prezime?>">
+    </label>
+    <label>OIB
+        <input type="number" name="oib" value="<?=$korisnik->oib?>">
+    </label>
+    <label>Država
+        <input type="text" name="drzava" value="<?=$korisnik->drzava?>">
+    </label>
+    <label>Grad
+        <input type="text" name="grad" value="<?=$korisnik->grad?>">
+    </label>
+    <label>Poštanski broj
+        <input type="number" name="postanski_broj" value="<?=$korisnik->postanski_broj?>">
+    </label>
+    <label>Ulica
+        <input type="text" name="ulica" value="<?=$korisnik->ulica?>">
+    </label>
+    <label>Kućni broj
+        <input type="text" name="kucni_broj" value="<?=$korisnik->kucni_broj?>">
+    </label>
+    <label>Email
+        <input type="email" name="email" value="<?=$korisnik->email?>">
+    </label>
+    <label>Datum rođenja
+        <input type="date" name="datum_rodenja" value="<?=$korisnik->datum_rodenja?>">
+    </label>
+    <label>Broj telefona
+        <input type="text" name="broj_telefona" value="<?=$korisnik->broj_telefona?>">
+    </label>
+    <label>Spol
+        <input type="text" name="spol" value="<?=$korisnik->spol?>">
+    </label>
+
+    <?=$poruka?>
+
+    <div class="grid-x grid-padding-x">
+        <div class="cell large-6">
+            <a class="alert button expanded" href="<?=App::config('url')?>korisnik">Odustani</a>
+        </div>
+        <div class="cell large-6">
+            <input type="submit" class="button expanded" value="Dodaj"></input>  
+        </div>
+    </div>
+</form>

@@ -1,0 +1,28 @@
+<a href="<?=App::config('url')?>kategorija/novi" class="success button expanded">Dodaj novu kategoriju</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Opis</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($entiteti as $e): ?>
+        <tr>
+            <td><?=$e->naziv?></td>
+            <td><?=$e->opis?></td>
+            <td>
+                    <a href="<?=App::config('url')?>kategorija/promjena/<?=$e->sifra?>">
+                        <i style="color: blue;" class="fi-page-edit"></i>
+                    </a>
+                    &nbsp;&nbsp;
+                    <a href="<?=App::config('url')?>kategorija/brisanje/<?=$e->sifra?>"
+                    onclick="return confirm('Sigurno želite obrisati kategoriju <?=$e->naziv?>'">
+                        <i style="color: red;" class="fi-page-delete"></i>
+                    </a>
+                </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

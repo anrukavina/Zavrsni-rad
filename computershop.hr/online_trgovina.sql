@@ -13,6 +13,10 @@ use online_trgovina;
 #to 'antun'@'localhost'
 #identified by 'antun';
 
+# Od ove linije se izvodi na shared hostingu
+
+alter database helios_onlinetrgovina character set utf8mb4;
+
 create table operater (
     sifra int not null primary key auto_increment,
     email varchar(50) not null,
