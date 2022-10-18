@@ -1,12 +1,29 @@
-<form action="<?=App::config('url')?>proizvod/promjena/<?=$e->sifra?>" 
-method="post">
+<form method="post" action="<?=App::config('url')?>proizvod/promjena/<?=$e->sifra?>">
+<h4 class="text-center">Detalji predavača</h4>
 
-<div class="grid-x grid-padding-x">
-    <div class="large-4 cell">
-        <?php include_once 'opciPodaci.phtml' ?>
-    </div>
-</div>
+<label>Naziv
+        <input type="text" name="naziv" value="<?=$e->naziv?>"/>
+</label>
 
+<label>Vrsta
+    <input type="text" name="vrsta" value="<?=$e->vrsta?>"/>
+</label>
+
+<label>Cijena
+    <input type="text" name="cijena" value="<?=$e->cijena?>"/>
+</label>
+
+<label>Boja
+    <input type="text" name="boja" value="<?=$e->boja?>"/>
+</label>
+
+<label>Tezina
+    <input type="text" name="tezina" value="<?=$e->tezina?>"/>
+</label>
+
+<label>Kategorija
+    <input type="text" name="kategorija" value="<?=$e->kategorija?>"/>
+</label>
 
 <?=$poruka?>
 
