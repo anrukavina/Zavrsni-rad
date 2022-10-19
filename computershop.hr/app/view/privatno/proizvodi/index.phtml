@@ -1,5 +1,4 @@
 <a href="<?=App::config('url')?>proizvod/novi" class="success button expanded">Dodaj novi proizvod</a>
-
 <table>
     <thead>
         <tr>
@@ -25,11 +24,11 @@
                         <i style="color: blue;" class="fi-page-edit"></i>
                     </a>
                     &nbsp;&nbsp;
-                    <a href="<?=App::config('url')?>proizvod/brisanje/<?=$e->sifra?>"
-                    onclick="return confirm('Sigurno želite obrisati proizvod <?=$e->naziv?>'">
+                    <a onclick="return confirm('Sigurno želite obrisati proizvod <?=$e->naziv?>?');"
+                    href="<?=App::config('url')?>proizvod/brisanje/<?=$e->sifra?>">
                         <i style="color: red;" class="fi-page-delete"></i>
                     </a>
-                </td>
+            </td>
         </tr>
     <?php endforeach; ?>
     </tbody>

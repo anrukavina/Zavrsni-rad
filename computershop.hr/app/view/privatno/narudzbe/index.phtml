@@ -1,0 +1,31 @@
+<a href="<?=App::config('url')?>narudzba/nova" class="success button expanded">Dodaj novu narudžbu</a>
+<table>
+    <thead>
+        <tr>
+            <th>Broj praćenja</th>
+            <th>Datum narudžbe</th>
+            <th>Datum isporuke</th>
+            <th>Korisnik</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($entiteti as $e): ?>
+            <tr>
+                <td><?=$e->broj_pracenja?></td>
+                <td><?=$e->datum_narudzbe?></td>
+                <td><?=$e->datum_isporuke?></td>
+                <td><?=$e->korisnik?></td>
+                <td>
+                        <a href="<?=App::config('url')?>narudzba/promjena/<?=$e->sifra?>">
+                            <i style="color: blue;" class="fi-page-edit"></i>
+                        </a>
+                        &nbsp;&nbsp;
+                        <a onclick="return confirm('Sigurno želite obrisati narudžbu <?=$e->broj_pracenja?>?');"
+                        href="<?=App::config('url')?>narudzba/brisanje/<?=$e->sifra?>">
+                            <i style="color: red;" class="fi-page-delete"></i>
+                        </a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

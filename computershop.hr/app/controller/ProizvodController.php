@@ -22,50 +22,64 @@ class ProizvodController extends AutorizacijaController
             'cijena'=>'',
             'boja'=>'',
             'tezina'=>'',
-            'kategorija'=>''
+            'kategorija'=>1
         ]);
         header('location: ' . App::config('url') . 'proizvod/promjena/' . $noviProizvod);
     }
 
     public function promjena($sifra)
     {
+        $kategorije = $this->ucitajKategorije();
         if(!isset($_POST['naziv'])){
+
             $e = Proizvod::readOne($sifra);
-            if($e=null){
+            if($e==null){
                 header('location: ' . App::config('url') . 'proizvod');
             }
             
-            $this->view->render($this->phtmlDir . 'detalji',[
+            /* $this->view->render($this->phtmlDir . 'detalji',[
                 'e'=>$e,
                 'poruka'=>'Unesite podatke'
-            ]);
+            ]); */
+
+            $this->detalji($e,$kategorije,'Unesite podatke');
             return;
         }
 
         $this->entitet = (object) $_POST;
-        $this->entitet->cijena = isset($_POST['cijena']);
         $this->entitet->sifra=$sifra;
 
-        if($this->kontrola()){
+        if($this->kontrolaNovi()){
             Proizvod::update((array)$this->entitet);
             header('location: ' . App::config('url') . 'proizvod');
             return;
         }
 
-        $this->view->render($this->phtmlDir . 'detalji', [
+       /*  $this->view->render($this->phtmlDir . 'detalji', [
             'e'=>$this->entitet,
             'poruka'=>$this->poruka
+        ]); */
+
+        $this->detalji($this->entitet,$kategorije,$this->poruka);
+    }
+
+    private function detalji($e,$kategorije,$poruka)
+    {
+        $this->view->render($this->phtmlDir . 'detalji', [
+            'e'=>$e,
+            'kategorije'=>$kategorije,
+            'poruka'=>$poruka
         ]);
     }
 
     private function kontrolaNovi()
     {
-        return $this->kontrolaNaziv() && $this->kontrolaVrsta();
+        return $this->kontrolaNaziv() && $this->kontrolaVrsta() && $this->kontrolaKategorija();
     }
 
     private function kontrolaNaziv()
     {
-        if(strlen($this->proizvod->naziv)===0){
+        if(strlen($this->entitet->naziv)===0){
             $this->poruka = 'Naziv obavezan';
             return false;
         }
@@ -74,20 +88,39 @@ class ProizvodController extends AutorizacijaController
 
     private function kontrolaVrsta()
     {
-        if(strlen($this->proizvod->vrsta)===0){
+        if(strlen($this->entitet->vrsta)===0){
             $this->poruka = 'Vrsta obavezno';
             return false;
         }
         return true;
     }
 
-
-
+    private function kontrolaKategorija()
+    {
+        if($this->entitet->kategorija==0){
+            $this->poruka='Obavezno kategorija';
+            return false;
+        }
+        return true;
+    }
 
     public function brisanje($sifra)
     {
         Proizvod::delete($sifra);
         header('location: ' . App::config('url') . 'proizvod');
+    }
+
+    private function ucitajKategorije()
+    {
+        $kategorije = [];
+        $k = new stdClass();
+        $k->sifra=0;
+        $k->naziv='Odaberi kategoriju';
+        $kategorije[]=$k;
+        foreach(Kategorija::read() as $kategorija){
+            $kategorije[]=$kategorija;
+        }
+        return $kategorije;
     }
 
     /* public function index()

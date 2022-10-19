@@ -1,17 +1,17 @@
 <?php
 
-class Proizvod
+class Narudzba
 {
     public static function readOne($sifra)
     {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-            select a.sifra, a.naziv, a.vrsta, a.cijena, a.boja, a.tezina, b.naziv as kategorija
-                from proizvod a inner join kategorija b
-                on a.kategorija=b.sifra
+            select a.sifra, a.broj_pracenja, a.datum_narudzbe, a.datum_isporuke, b.ime as korisnik, b.prezime
+                from narudzba a inner join korisnik b
+                on a.korisnik = b.sifra
             where a.sifra=:sifra
-
+        
         ');
         $izraz->execute([
             'sifra'=>$sifra
@@ -19,17 +19,16 @@ class Proizvod
         return $izraz->fetch();
     }
 
-
     // CRUD - read
 
     public static function read()
     {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
-
-            select a.sifra, a.naziv, a.vrsta, a. cijena, a.boja, a.tezina, b.naziv as kategorija
-                from proizvod a inner join kategorija b
-            on a.kategorija=b.sifra
+        
+            select a.sifra, a.broj_pracenja, a.datum_narudzbe, a.datum_isporuke, b.ime as korisnik, b.prezime
+                from narudzba a inner join korisnik b
+                on a.korisnik = b.sifra
             order by a.sifra
         
         ');
@@ -44,23 +43,20 @@ class Proizvod
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-            insert into proizvod 
-            (naziv,vrsta,cijena,boja,tezina,kategorija)
+            insert into narudzba
+                (broj_pracenja, datum_narudzbe, datum_isporuke, korisnik)
             values 
-            (:naziv,:vrsta,:cijena,:boja,:tezina,:kategorija)
+                (:broj_pracenja, :datum_narudzbe, :datum_isporuke, :korisnik)
         
         ');
         $izraz->execute([
-            'naziv'=>$param['naziv'],
-            'vrsta'=>$param['vrsta'],
-            'cijena'=>$param['cijena'],
-            'boja'=>$param['boja'],
-            'tezina'=>$param['tezina'],
-            'kategorija'=>$param['kategorija']
+            'broj_pracenja'=>$param['broj_pracenja'],
+            'datum_narudzbe'=>$param['datum_narudzbe'],
+            'datum_isporuke'=>$param['datum_isporuke'],
+            'korisnik'=>$param['korisnik']
         ]);
         return $veza->lastInsertId();
     }
-
 
     // CRUD - update
 
@@ -70,23 +66,19 @@ class Proizvod
         $veza->beginTransaction();
         $izraz = $veza->prepare('
         
-            update proizvod set
-                naziv=:naziv,
-                vrsta=:vrsta,
-                cijena=:cijena,
-                boja=:boja,
-                tezina=:tezina,
-                kategorija=:kategorija
+            update narudzba set
+                broj_pracenja=:broj_pracenja,
+                datum_narudzbe=:datum_narudzbe,
+                datum_isporuke=:datum_isporuke,
+                korisnik=:korisnik
             where sifra=:sifra
-
+        
         ');
         $izraz->execute([
-            'naziv'=>$param['naziv'],
-            'vrsta'=>$param['vrsta'],
-            'cijena'=>$param['cijena'],
-            'boja'=>$param['boja'],
-            'tezina'=>$param['tezina'],
-            'kategorija'=>$param['kategorija'],
+            'broj_pracenja'=>$param['broj_pracenja'],
+            'datum_narudzbe'=>$param['datum_narudzbe'],
+            'datum_isporuke'=>$param['datum_isporuke'],
+            'korisnik'=>$param['korisnik'],
             'sifra'=>$param['sifra']
         ]);
         $veza->commit();
@@ -99,13 +91,11 @@ class Proizvod
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-            delete from proizvod where sifra=:sifra
+            delete from narudzba where sifra=:sifra
         
         ');
         $izraz->execute([
             'sifra'=>$sifra
         ]);
     }
-    
-       
 }

@@ -1,29 +1,34 @@
-<form method="post" action="<?=App::config('url')?>proizvod/promjena/<?=$e->sifra?>">
-<h4 class="text-center">Detalji predavača</h4>
+<form method="post" 
+    action="<?=App::config('url')?>proizvod/promjena/<?=$e->sifra?>">
+<h4 class="text-center">Detalji proizvoda</h4>
 
 <label>Naziv
-        <input type="text" name="naziv" value="<?=$e->naziv?>"/>
+        <input type="text" name="naziv" id="naziv" value="<?=$e->naziv?>"/>
 </label>
-
 <label>Vrsta
     <input type="text" name="vrsta" value="<?=$e->vrsta?>"/>
 </label>
-
 <label>Cijena
     <input type="text" name="cijena" value="<?=$e->cijena?>"/>
 </label>
-
 <label>Boja
     <input type="text" name="boja" value="<?=$e->boja?>"/>
 </label>
-
 <label>Tezina
     <input type="text" name="tezina" value="<?=$e->tezina?>"/>
 </label>
 
-<label>Kategorija
-    <input type="text" name="kategorija" value="<?=$e->kategorija?>"/>
-</label>
+<label>Kategorija</label>
+    <select name="kategorija" id="kategorija">
+        <?php foreach($kategorije as $k): ?>
+            <option
+            <?php if($e->kategorija == $k->sifra){
+                echo ' selected=="selected"';
+            }
+            ?> 
+            value="<?=$k->sifra?>"><?=$k->naziv?></option>
+        <?php endforeach; ?>
+    </select>
 
 <?=$poruka?>
 

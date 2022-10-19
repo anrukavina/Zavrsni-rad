@@ -15,7 +15,7 @@ use online_trgovina;
 
 # Od ove linije se izvodi na shared hostingu
 
-alter database helios_onlinetrgovina character set utf8mb4;
+#alter database helios_onlinetrgovina character set utf8mb4;
 
 create table operater (
     sifra int not null primary key auto_increment,
@@ -101,7 +101,8 @@ insert into proizvod (naziv,vrsta,cijena,boja,tezina)
 values
 ('ASUS G15DK','Stolno računalo','12229','crna','11'),
 ('Lenovo IdeaPad 5 Pro','Prijenosno računalo','6699','siva','1.9'),
-('Apple iPhone 13 Pro','Smartphone','10499','siva','0.204');
+('Apple iPhone 13 Pro','Smartphone','10499','siva','0.204'),
+('Proizvod',null,null,null,null);
 
 # unos podataka u tablicu 'narudzba'
 
@@ -131,3 +132,4 @@ values ('Stolna računala','Stolno računalo ili PC (Personal computer) je raču
 update proizvod set kategorija=1 where sifra=1;
 update proizvod set kategorija=2 where sifra=2;
 update proizvod set kategorija=3 where sifra=3;
+update proizvod set kategorija=3 where sifra=4;

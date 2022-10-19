@@ -9,6 +9,8 @@ class KategorijaController extends AutorizacijaController
 
     public function index()
     {
+        $kategorije = Kategorija::read();
+
         $this->view->render($this->phtmlDir . 'index', [
             'entiteti' => Kategorija::read()
         ]);

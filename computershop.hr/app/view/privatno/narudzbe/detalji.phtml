@@ -1,0 +1,37 @@
+<form method="post" action="<?=App::config('url')?>narudzba/promjena/<?=$e->sifra?>">
+    <h4 class="text-center">Detalji narudžbe</h4>
+
+    <label>Broj praćenja
+        <input type="text" name="broj_pracenja" id="broj_pracenja" value="<?=$e->broj_pracenja?>"/>
+    </label>
+    <label>Datum narudžbe
+        <input type="date" name="datum_narudzbe" id="datum_narudzbe" value="<?=$e->datum_narudzbe?>"/>
+    </label>
+    <label>Datum isporuke
+        <input type="date" name="datum_isporuke" id="datum_isporuke" value="<?=$e->datum_isporuke?>"/>
+    </label>
+   <label>Korisnik</label>
+        <select name="korisnik" id="korisnik">
+            <?php foreach($korisnici as $k): ?>
+                <option
+                <?php if($e->korisnik == $k->sifra){
+                    echo ' selected=="selected"';
+                }
+                ?>
+                value="<?=$k->sifra?>"><?=$k->ime?> <?=$k->prezime?></option>
+            <?php endforeach; ?>
+        </select>
+            
+    <?=$poruka?>
+
+    <div class="grid-x grid-padding-x">
+        <div class="large-6 cell">
+            <a class="alert button expanded" 
+                href="<?=App::config('url')?>narudzba">Odustani</a>
+        </div>
+        <div class="large-6 cell">
+            <input type="submit" class="button expanded" value="Spremi"></input>
+        </div>
+    </div>
+
+</form>
