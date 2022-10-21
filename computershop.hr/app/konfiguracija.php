@@ -17,6 +17,7 @@ if($dev){
     ];
 } else{
     return [
+        'dev'=>$dev,
         'url'=>'https://polaznik08.edunova.hr/',
         'nazivApp'=>'Computer Shop',
         'baza'=>[
