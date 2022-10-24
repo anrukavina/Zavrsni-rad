@@ -26,10 +26,12 @@ class Narudzba
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-            select a.sifra, a.broj_pracenja, a.datum_narudzbe, a.datum_isporuke, b.ime as korisnik, b.prezime
+            select a.sifra, a.broj_pracenja, a.datum_narudzbe, a.datum_isporuke, concat (b.ime,\' \',b.prezime) as korisnik
                 from narudzba a inner join korisnik b
                 on a.korisnik = b.sifra
-            order by a.sifra
+                left join stavke c
+                on a.sifra = c.narudzba
+            group by a.sifra, a.broj_pracenja, concat (b.ime,\' \',b.prezime), a.datum_narudzbe, a.datum_isporuke
         
         ');
         $izraz->execute();

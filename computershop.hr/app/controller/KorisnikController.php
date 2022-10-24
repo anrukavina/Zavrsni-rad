@@ -48,8 +48,22 @@ class KorisnikController extends AutorizacijaController
 
     public function brisanje($sifra)
     {
+        $korisnik = Korisnik::readOne($sifra);
+        if($korisnik==null){
+            header('location: ' . App::config('url') . 'korisnik');
+        }
+        
+        if(!isset($_POST['obrisi'])){
+            $this->view->render($this->phtmlDir . 'delete', [
+                'korisnik' => $korisnik,
+                'brisanje' => Korisnik::brisanje($sifra),
+                'poruka' => 'Detalji korisnika za brisanje'
+            ]);
+            return;
+        }
+
         Korisnik::delete($sifra);
-        header('location: ' . App::config('url') . 'korisnik');
+        header('location: ' . App::config('url') . 'korisnik');        
     }
 
 

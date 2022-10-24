@@ -1,0 +1,58 @@
+<form method="post" action="<?=App::config('url')?>korisnik/brisanje/<?=$korisnik->sifra?>">
+  <h4 class="text-center">Brisanje korisnika</h4>
+  <label>Ime
+        <input disabled="disabled" type="text" name="ime" value="<?=$korisnik->ime?>">
+    </label>
+    <label>Prezime
+        <input disabled="disabled" type="text" name="prezime" value="<?=$korisnik->prezime?>">
+    </label>
+    <label>OIB
+        <input disabled="disabled" type="number" name="oib" value="<?=$korisnik->oib?>">
+    </label>
+    <label>Država
+        <input disabled="disabled" type="text" name="drzava" value="<?=$korisnik->drzava?>">
+    </label>
+    <label>Grad
+        <input disabled="disabled" type="text" name="grad" value="<?=$korisnik->grad?>">
+    </label>
+    <label>Poštanski broj
+        <input disabled="disabled" type="number" name="postanski_broj" value="<?=$korisnik->postanski_broj?>">
+    </label>
+    <label>Ulica
+        <input disabled="disabled" type="text" name="ulica" value="<?=$korisnik->ulica?>">
+    </label>
+    <label>Kućni broj
+        <input disabled="disabled" type="text" name="kucni_broj" value="<?=$korisnik->kucni_broj?>">
+    </label>
+    <label>Email
+        <input disabled="disabled" type="email" name="email" value="<?=$korisnik->email?>">
+    </label>
+    <label>Datum rođenja
+        <input disabled="disabled" type="date" name="datum_rodenja" value="<?=$korisnik->datum_rodenja?>">
+    </label>
+    <label>Broj telefona
+        <input disabled="disabled" type="text" name="broj_telefona" value="<?=$korisnik->broj_telefona?>">
+    </label>
+    <label>Spol
+        <input disabled="disabled" type="text" name="spol" value="<?=$korisnik->spol?>">
+    </label>
+
+  <?=$poruka?>
+
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 cell">
+        <a class="alert button expanded" 
+            href="<?=App::config('url')?>korisnik">Odustani</a>
+    </div>
+    <div class="large-6 cell">
+        <?php if($brisanje): ?>
+            <input type="hidden" name="obrisi" value="true" />
+            <input type="submit" class="button expanded" value="Obriši"></input>
+        <?php else: ?>
+            Korisnik se ne može obrisati jer se nalazi na jednoj, ili više narudžbi.
+        <?php endif;?>
+    </div>
+  </div>
+
+
+</form>

@@ -1,6 +1,5 @@
 <?php
 
-
 $dev = $_SERVER['SERVER_ADDR'] == '127.0.0.1';
 
 if($dev){
@@ -28,4 +27,3 @@ if($dev){
         ]
     ];
 }
-

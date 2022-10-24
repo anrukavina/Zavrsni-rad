@@ -29,9 +29,16 @@
                         <i style="color: blue;" class="fi-page-edit"></i>
                     </a>
                     &nbsp;&nbsp;
-                    <a href="<?=App::config('url')?>korisnik/brisanje/<?=$k->sifra?>">
-                        <i style="color: red;" class="fi-page-delete"></i>
-                    </a>
+                    <?php if($k->narudzba==0): ?>
+                        <a onclick="return confirm('Sigurno obrisati <?=$k->prezime?>?');" 
+                        href="<?=App::config('url')?>korisnik/brisanje/<?=$k->sifra?>">
+                            <i style="color: red;" class="fi-page-delete"></i>
+                        </a>
+                        <?php else: ?>
+                            <a href="<?=App::config('url')?>korisnik/brisanje/<?=$k->sifra?>">
+                            <i style="color: gray;" class="fi-page-delete"></i>
+                        </a>
+                    <?php endif; ?>
                 </td>
             </tr>
         <?php endforeach; ?>

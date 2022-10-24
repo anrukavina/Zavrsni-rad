@@ -6,6 +6,7 @@
             <th>Datum narudžbe</th>
             <th>Datum isporuke</th>
             <th>Korisnik</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -20,10 +21,12 @@
                             <i style="color: blue;" class="fi-page-edit"></i>
                         </a>
                         &nbsp;&nbsp;
-                        <a onclick="return confirm('Sigurno želite obrisati narudžbu <?=$e->broj_pracenja?>?');"
-                        href="<?=App::config('url')?>narudzba/brisanje/<?=$e->sifra?>">
-                            <i style="color: red;" class="fi-page-delete"></i>
-                        </a>
+                        <!-- <?php if($e->narudzba==0): ?> -->
+                            <a onclick="return confirm('Sigurno želite obrisati narudžbu <?=$e->broj_pracenja?>?');"
+                            href="<?=App::config('url')?>narudzba/brisanje/<?=$e->sifra?>">
+                                <i style="color: red;" class="fi-page-delete"></i>
+                            </a>
+                        <!-- <?php endif; ?> -->
                 </td>
             </tr>
         <?php endforeach; ?>
