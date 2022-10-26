@@ -24,7 +24,7 @@
                         <!-- <?php if($e->narudzba==0): ?> -->
                             <a onclick="return confirm('Sigurno želite obrisati narudžbu <?=$e->broj_pracenja?>?');"
                             href="<?=App::config('url')?>narudzba/brisanje/<?=$e->sifra?>">
-                                <i style="color: red;" class="fi-page-delete"></i>
+                                <i style="color: red; cursor: pointer;" class="fi-page-delete"></i>
                             </a>
                         <!-- <?php endif; ?> -->
                 </td>

@@ -10,7 +10,7 @@
         <input type="number" name="oib" value="<?=$korisnik->oib?>">
     </label>
     <label>Država
-        <input type="text" name="drzava" value="<?=$korisnik->drzava?>">
+        <?php include_once 'drzaveDropdown.phtml'; ?>
     </label>
     <label>Grad
         <input type="text" name="grad" value="<?=$korisnik->grad?>">

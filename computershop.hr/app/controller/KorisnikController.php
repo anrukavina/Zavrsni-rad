@@ -11,6 +11,14 @@ class KorisnikController extends AutorizacijaController
     {
         $korisnici = Korisnik::read();
 
+        foreach($korisnici as $k){
+            if($k->datum_rodenja!=null && $k->datum_rodenja!='0000-00-00 00:00:00'){
+                $k->datum_rodenja = date('d.m.Y.', strtotime($k->datum_rodenja));
+            } else{
+                $k->datum_rodenja='Nije postavljeno';
+            }
+        }
+
         $this->view->render($this->phtmlDir . 'read', [
             'korisnici' => $korisnici
         ]);

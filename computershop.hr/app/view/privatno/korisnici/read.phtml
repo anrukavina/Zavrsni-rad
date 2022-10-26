@@ -11,6 +11,7 @@
             <th>Datum rođenja</th>
             <th>Broj telefona</th>
             <th>Spol</th>
+            <th>Detaljnije</th>
             <th>Akcija</th>
         </tr>   
     </thead>
@@ -24,6 +25,7 @@
                 <td><?=$k->datum_rodenja?></td>
                 <td><?=$k->broj_telefona?></td>
                 <td><?=$k->spol?></td>
+                <td></td>
                 <td>
                     <a href="<?=App::config('url')?>korisnik/promjena/<?=$k->sifra?>">
                         <i style="color: blue;" class="fi-page-edit"></i>
@@ -36,7 +38,7 @@
                         </a>
                         <?php else: ?>
                             <a href="<?=App::config('url')?>korisnik/brisanje/<?=$k->sifra?>">
-                            <i style="color: gray;" 
+                            <i style="color: gray; cursor: pointer;" 
                             title="Korisnik se ne može obrisati jer se nalazi na jednoj ili više narudžbi."
                             class="fi-page-delete"></i>
                         </a>

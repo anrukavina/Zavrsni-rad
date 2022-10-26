@@ -47,7 +47,7 @@ class Proizvod
             on a.kategorija=b.sifra
                 left join stavke c
             on a.sifra=c.proizvod
-            group by a.sifra, a.naziv, a.vrsta, b.naziv
+            group by a.sifra, a.naziv, a.vrsta
             order by 1,2,3
         
         ');
@@ -125,7 +125,7 @@ class Proizvod
         ]);
     }
     
-    public static function search($uvjet)
+    public static function search($uvjet,$narudzba)
     {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('

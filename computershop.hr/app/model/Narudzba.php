@@ -2,24 +2,6 @@
 
 class Narudzba
 {
-    /* public static function readOne($sifra)
-    {
-        $veza = DB::getInstance();
-        $izraz = $veza->prepare('
-        
-            select a.sifra, a.broj_pracenja, a.datum_narudzbe, a.datum_isporuke, b.ime as korisnik, b.prezime
-                from narudzba a inner join korisnik b
-                on a.korisnik = b.sifra
-            where a.sifra=:sifra
-        
-        ');
-        $izraz->execute([
-            'sifra'=>$sifra
-        ]);
-        return $izraz->fetch(); 
-    }*/
-    
-
     public static function readOne($sifra)
     {
         $veza = DB::getInstance();
@@ -37,7 +19,7 @@ class Narudzba
         }
         $izraz = $veza->prepare('
         
-            select a.sifra, b.naziv
+            select a.sifra, a.naziv, c.kolicina
                 from proizvod a inner join kategorija b
                 on a.kategorija=b.sifra 
             inner join stavke c
@@ -136,18 +118,19 @@ class Narudzba
 
     // Dodavanje proizvoda
 
-    public static function dodajproizvod($narudzba,$proizvod)
+    public static function dodajproizvod($narudzba,$proizvod,$kolicina)
     {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-            insert into stavke (narudzba,proizvod) 
-            values (:narudzba,:proizvod)
+            insert into stavke (narudzba,proizvod,kolicina) 
+            values (:narudzba,:proizvod,:kolicina)
 
         ');
         $izraz->execute([
             'narudzba' => $narudzba,
-            'proizvod' => $proizvod
+            'proizvod' => $proizvod,
+            'kolicina' => $kolicina
         ]);
     }
 

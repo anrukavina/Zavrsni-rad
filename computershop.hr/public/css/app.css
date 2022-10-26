@@ -8,6 +8,21 @@
     border-radius: 0;
 }
 
+.top-bar,
+.top-bar ul {
+    font-family: "Nunito", Helvetica, Roboto, Arial, sans-serif;
+    background: #1779ba;
+}
+
+.top-bar ul a {
+    color: white;
+}
+
+.menu .menu-text {
+    color: rgb(189, 177, 255);
+}
+
+
 /* table {
     table-layout: fixed;
     width: 100%;

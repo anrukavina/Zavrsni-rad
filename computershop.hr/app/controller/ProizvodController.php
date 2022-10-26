@@ -10,9 +10,25 @@ class ProizvodController extends AutorizacijaController
     public function index()
     {
         $proizvodi = Proizvod::read();
+        $nf = new NumberFormatter("hr-HR", \NumberFormatter::DECIMAL);
+        $nf->setPattern('#,##0.00');
+        
+        foreach($proizvodi as $p){
+            $p->cijena = $nf->format($p->cijena);
+
+            // dodavanje slike
+            if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR
+            . 'proizvodi' . DIRECTORY_SEPARATOR . $p->sifra . '.jpg')){
+                $p->slika = App::config('url') . 'public/img/proizvodi/' . $p->sifra . '.jpg';
+            } else{
+                $p->slika = App::config('url') . 'public/img/nepoznato.jpg';
+            }
+        }
+
+
 
         $this->view->render($this->phtmlDir . 'index', [
-            'entiteti' => Proizvod::read()
+            'entiteti' => $proizvodi
         ]);
     }
 
@@ -39,10 +55,13 @@ class ProizvodController extends AutorizacijaController
                 header('location: ' . App::config('url') . 'proizvod');
             }
             
-            /* $this->view->render($this->phtmlDir . 'detalji',[
-                'e'=>$e,
-                'poruka'=>'Unesite podatke'
-            ]); */
+            // promjena slike
+            if(file_exists(BP . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR
+            . 'proizvodi' . DIRECTORY_SEPARATOR . $sifra . '.jpg')){
+                $e->slika = App::config('url') . 'public/img/proizvodi/' .$sifra . '.jpg';
+            } else{
+                $e->slika = App::config('url') . 'public/img/nepoznato.jpg';
+            }
 
             $this->detalji($e,$kategorije,'Unesite podatke');
             return;
@@ -53,6 +72,16 @@ class ProizvodController extends AutorizacijaController
 
         if($this->kontrolaNovi()){
             Proizvod::update((array)$this->entitet);
+
+            //promjena slike
+
+            if(isset($_FILES['slika'])){
+                move_uploaded_file($_FILES['slika']['tmp_name'],
+                BP . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR 
+                . 'proizvodi' . DIRECTORY_SEPARATOR . $sifra . '.jpg');
+            }
+
+
             header('location: ' . App::config('url') . 'proizvod');
             return;
         }
@@ -76,7 +105,7 @@ class ProizvodController extends AutorizacijaController
 
     private function kontrolaNovi()
     {
-        return $this->kontrolaNaziv() && $this->kontrolaVrsta() && $this->kontrolaKategorija();
+        return $this->kontrolaNaziv() && $this->kontrolaKategorija();
     }
 
     private function kontrolaNaziv()
@@ -88,14 +117,14 @@ class ProizvodController extends AutorizacijaController
         return true;
     }
 
-    private function kontrolaVrsta()
+    /* private function kontrolaVrsta()
     {
         if(strlen($this->entitet->vrsta)===0){
             $this->poruka = 'Vrsta obavezno';
             return false;
         }
         return true;
-    }
+    } */
 
     private function kontrolaKategorija()
     {

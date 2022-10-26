@@ -1,44 +1,35 @@
 <a href="<?=App::config('url')?>proizvod/novi" class="success button expanded">Dodaj novi proizvod</a>
-<table>
-    <thead>
-        <tr>
-            <th>Naziv</th>
-            <th>Vrsta</th>
-            <th>Cijena</th>
-            <th>Boja</th>
-            <th>Tezina</th>
-            <th>Kategorija</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+
+<div class="grid-x grid-padding-x">
     <?php foreach($entiteti as $e): ?>
-        <tr>
-            <td><?=$e->naziv?></td>
-            <td><?=$e->vrsta?></td>
-            <td><?=$e->cijena?></td>
-            <td><?=$e->boja?></td>
-            <td><?=$e->tezina?></td>
-            <td><?=$e->kategorija?></td>
-            <td>
-                    <a href="<?=App::config('url')?>proizvod/promjena/<?=$e->sifra?>">
-                        <i style="color: blue;" class="fi-page-edit"></i>
-                    </a>
-                    &nbsp;&nbsp;
-                    <?php if($e->stavke==0): ?>
-                        <a onclick="return confirm('Sigurno obrisati <?=$e->naziv?>?');" 
-                        href="<?=App::config('url')?>proizvod/brisanje/<?=$e->sifra?>">
-                            <i style="color: red;" class="fi-page-delete"></i>
-                        </a>
-                        <?php else: ?>
-                            <a href="<?=App::config('url')?>proizvod/brisanje/<?=$e->sifra?>">
-                            <i style="color: gray;" 
-                            title="Proizvod se ne može obrisati jer se nalazi na jednoj ili više stavki."
-                            class="fi-page-delete"></i>
-                        </a>
-                    <?php endif; ?>
-            </td>
-        </tr>
+        <div class="large-4 cell">
+            <div class="callout" style="text-align: center;">
+                <img src="<?=$e->slika?>" alt="">
+            <hr/>
+            <h1 style="font-size: 1.5rem;"> <?=$e->naziv?></h1>
+            <?=$e->kategorija?>
+            <br/>
+            <?php if(($e->cijena)!== '0,00'): ?>
+            <?=$e->cijena?> kn
+            <?php endif;?>
+            <hr/>
+            <a href="<?=App::config('url')?>proizvod/promjena/<?=$e->sifra?>">
+                <i style="color: blue;" class="fi-page-edit"></i>
+            </a>
+            &nbsp;&nbsp;
+            <?php if($e->stavke==0): ?>
+                <a onclick="return confirm('Sigurno obrisati <?=$e->naziv?>?');" 
+                href="<?=App::config('url')?>proizvod/brisanje/<?=$e->sifra?>">
+                    <i style="color: red;" class="fi-page-delete"></i>
+                </a>
+                <?php else: ?>
+                    <a href="<?=App::config('url')?>proizvod/brisanje/<?=$e->sifra?>">
+                    <i style="color: gray; cursor: pointer;" 
+                    title="Proizvod se ne može obrisati jer se nalazi na jednoj ili više stavki."
+                    class="fi-page-delete"></i>
+                </a>
+            <?php endif; ?>
+            </div>
+        </div>
     <?php endforeach; ?>
-    </tbody>
-</table>
+</div>

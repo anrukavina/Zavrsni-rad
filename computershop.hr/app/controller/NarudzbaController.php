@@ -167,7 +167,7 @@ class NarudzbaController extends AutorizacijaController
         if(!isset($_GET['narudzba']) || !isset($_GET['proizvod'])){
             return;
         }
-        Narudzba::dodajproizvod($_GET['narudzba'],$_GET['proizvod']);
+        Narudzba::dodajproizvod($_GET['narudzba'],$_GET['proizvod'],$_GET['kolicina']);
     }
     
     public function obrisiproizvod()

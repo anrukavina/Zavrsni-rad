@@ -1,4 +1,4 @@
-<form method="post" 
+<form method="post" enctype="multipart/form-data" 
     action="<?=App::config('url')?>proizvod/promjena/<?=$e->sifra?>">
 <h4 class="text-center">Detalji proizvoda</h4>
 
@@ -29,6 +29,11 @@
             value="<?=$k->sifra?>"><?=$k->naziv?></option>
         <?php endforeach; ?>
     </select>
+
+<label>Slika (.jpg)
+    <input type="file" name="slika">
+</label>
+<img src="<?=$e->slika?>" alt="">
 
 <?=$poruka?>
 
