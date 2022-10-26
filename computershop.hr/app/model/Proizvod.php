@@ -2,6 +2,21 @@
 
 class Proizvod
 {
+    public static function brisanje($sifra)
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+            select count(*) from stavke where proizvod=:sifra
+
+        ');
+        $izraz->execute([
+            'sifra' => $sifra
+        ]);
+        $ukupno = $izraz->fetchColumn();
+        return $ukupno==0;
+    }
+
     public static function readOne($sifra)
     {
         $veza = DB::getInstance();
@@ -27,10 +42,13 @@ class Proizvod
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
 
-            select a.sifra, a.naziv, a.vrsta, a. cijena, a.boja, a.tezina, b.naziv as kategorija
+            select a.sifra, a.naziv, a.vrsta, a.cijena, a.boja, a.tezina, b.naziv as kategorija, count(c.sifra) as stavke
                 from proizvod a inner join kategorija b
             on a.kategorija=b.sifra
-            order by a.sifra
+                left join stavke c
+            on a.sifra=c.proizvod
+            group by a.sifra, a.naziv, a.vrsta, b.naziv
+            order by 1,2,3
         
         ');
         $izraz->execute();
@@ -107,5 +125,25 @@ class Proizvod
         ]);
     }
     
+    public static function search($uvjet)
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+            select a.sifra, a.naziv, a.vrsta, a.cijena, a.boja, a.tezina, b.naziv as kategorija
+                from proizvod a inner join kategorija b
+                on a.kategorija=b.sifra
+            where concat(a.naziv,\' \', a.cijena) like :uvjet
+            and a.sifra not in (select proizvod from stavke where narudzba=:narudzba)
+            order by 2,4
+            limit 10
+
+        ');
+        $izraz->execute([
+            'uvjet' => '%' . $uvjet . '%',
+            'narudzba' => $narudzba
+        ]);
+        return $izraz->fetchAll();
+    }
        
 }

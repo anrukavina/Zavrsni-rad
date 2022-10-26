@@ -4,13 +4,25 @@ class NarudzbaController extends AutorizacijaController
 {
     private $phtmlDir = 'privatno' . DIRECTORY_SEPARATOR . 'narudzbe' . DIRECTORY_SEPARATOR;
 
-    private $entitet = null;
+    private $entitet;
     private $poruka = '';
 
     public function index()
     {
+        $narudzbe = Narudzba::read();
+        foreach($narudzbe as $n){
+            if($n->datum_narudzbe!=null && $n->datum_narudzbe!='0000-00-00 00:00:00'
+            || $n->datum_isporuke!=null && $n->datum_isporuke!='0000-00-00 00:00:00'){
+                $n->datum_narudzbe = date('d.m.Y.', strtotime($n->datum_narudzbe));
+                $n->datum_isporuke = date('d.m.Y.', strtotime($n->datum_isporuke));
+            } else{
+                $n->datum_narudzbe='Nije postavljeno';
+                $n->datum_isporuke='Nije postavljeno';
+            }
+        }
+
         $this->view->render($this->phtmlDir . 'index', [
-            'entiteti'=>Narudzba::read()
+            'entiteti' => $narudzbe
         ]);
     }
 
@@ -31,6 +43,19 @@ class NarudzbaController extends AutorizacijaController
 
         if(!isset($_POST['broj_pracenja'])){
             $e = Narudzba::readOne($sifra);
+
+            if($e->datum_narudzbe!=null){
+                $e->datum_narudzbe = date('Y-m-d', strtotime($e->datum_narudzbe));
+            }else{
+                $e->datum_narudzbe= '';
+            }
+
+            if($e->datum_isporuke!=null){
+                $e->datum_isporuke = date('Y-m-d', strtotime($e->datum_isporuke));
+            }else{
+                $e->datum_isporuke= '';
+            }
+
             if($e==null){
                 header('location: ' . App::config('url') . 'narudzba');
             }
@@ -43,6 +68,14 @@ class NarudzbaController extends AutorizacijaController
         $this->entitet->sifra = $sifra;
 
         if($this->kontrolaNova()){
+            if($this->entitet->korisnik==0){
+                $this->entitet->korisnik=null;
+            }
+
+            if($this->entitet->datum_narudzbe==''){
+                $this->entitet->datum_narudzbe=null;
+            }
+
             Narudzba::update((array)$this->entitet);
             header('location:' . App::config('url') . 'narudzba');
             return;
@@ -54,9 +87,16 @@ class NarudzbaController extends AutorizacijaController
     private function detalji($e,$korisnici,$poruka)
     {
         $this->view->render($this->phtmlDir . 'detalji', [
-            'e'=>$e,
-            'korisnici'=>$korisnici,
-            'poruka'=>$poruka
+            'e' => $e,
+            'korisnici' => $korisnici,
+            'poruka' => $poruka,
+            'css' => '<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">',
+            'js' => '<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+            <script>
+                let url=\'' .  App::config('url') .  '\';
+                let narudzba=' . $e->sifra . ';    
+            </script>
+            <script src="'. App::config('url') . 'public/js/detaljiNarudzbe.js"></script>'
         ]);
     }
 
@@ -121,5 +161,20 @@ class NarudzbaController extends AutorizacijaController
         Narudzba::delete($sifra);
         header('location: ' . App::config('url') . 'narudzba');
     }
+
+    public function dodajproizvod()
+    {
+        if(!isset($_GET['narudzba']) || !isset($_GET['proizvod'])){
+            return;
+        }
+        Narudzba::dodajproizvod($_GET['narudzba'],$_GET['proizvod']);
+    }
     
+    public function obrisiproizvod()
+    {
+        if(!isset($_GET['narudzba']) || !isset($_GET['proizvod'])){
+            return;
+        }
+        Narudzba::obrisiproizvod($_GET['narudzba'],$_GET['proizvod']);
+    }
 }

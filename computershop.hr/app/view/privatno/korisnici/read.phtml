@@ -36,7 +36,9 @@
                         </a>
                         <?php else: ?>
                             <a href="<?=App::config('url')?>korisnik/brisanje/<?=$k->sifra?>">
-                            <i style="color: gray;" class="fi-page-delete"></i>
+                            <i style="color: gray;" 
+                            title="Korisnik se ne može obrisati jer se nalazi na jednoj ili više narudžbi."
+                            class="fi-page-delete"></i>
                         </a>
                     <?php endif; ?>
                 </td>

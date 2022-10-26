@@ -1,0 +1,47 @@
+<form method="post" action="<?=App::config('url')?>proizvod/brisanje/<?=$proizvod->sifra?>">
+  <h4 class="text-center">Brisanje proizvoda</h4>
+    <label>Naziv
+        <input disabled="disabled" type="text" name="naziv" id="naziv" value="<?=$proizvod->naziv?>"/>
+    </label>
+    <label>Vrsta
+        <input disabled="disabled" type="text" name="vrsta" value="<?=$proizvod->vrsta?>"/>
+    </label>
+    <label>Cijena
+        <input disabled="disabled" type="text" name="cijena" value="<?=$proizvod->cijena?>"/>
+    </label>
+    <label>Boja
+        <input disabled="disabled" type="text" name="boja" value="<?=$proizvod->boja?>"/>
+    </label>
+    <label>Tezina
+        <input disabled="disabled" type="text" name="tezina" value="<?=$proizvod->tezina?>"/>
+    </label>
+
+    <label>Kategorija</label>
+        <select disabled="disabled" name="kategorija" id="kategorija">
+            <?php foreach($kategorije as $k): ?>
+                <option
+                <?php if($e->kategorija == $k->sifra){
+                    echo ' selected=="selected"';
+                }
+                ?> 
+                value="<?=$k->sifra?>"><?=$k->naziv?></option>
+            <?php endforeach; ?>
+        </select>
+
+  <?=$poruka?>
+
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 cell">
+        <a class="alert button expanded" 
+            href="<?=App::config('url')?>proizvod">Odustani</a>
+    </div>
+    <div class="large-6 cell">
+        <?php if($brisanje): ?>
+            <input type="hidden" name="obrisi" value="true" />
+            <input type="submit" class="button expanded" value="Obriši"></input>
+        <?php else: ?>
+            Proizvod se ne može obrisati jer se nalazi na jednoj ili više stavki.
+        <?php endif;?>
+    </div>
+  </div>
+</form>

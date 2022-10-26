@@ -2,7 +2,7 @@
 
 class Narudzba
 {
-    public static function readOne($sifra)
+    /* public static function readOne($sifra)
     {
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
@@ -16,7 +16,40 @@ class Narudzba
         $izraz->execute([
             'sifra'=>$sifra
         ]);
-        return $izraz->fetch();
+        return $izraz->fetch(); 
+    }*/
+    
+
+    public static function readOne($sifra)
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+            select * from narudzba where sifra=:sifra
+        
+        ');
+        $izraz->execute([
+            'sifra' => $sifra
+        ]);
+        $narudzba = $izraz->fetch();
+        if($narudzba->datum_narudzbe=='0000-00-00 00:00:00'){
+            $narudzba->datum_narudzbe=null;
+        }
+        $izraz = $veza->prepare('
+        
+            select a.sifra, b.naziv
+                from proizvod a inner join kategorija b
+                on a.kategorija=b.sifra 
+            inner join stavke c
+                on c.proizvod=a.sifra 
+            where c.narudzba=:sifra 
+        
+        ');
+        $izraz->execute([
+            'sifra' => $sifra
+        ]);
+        $narudzba->proizvodi = $izraz->fetchAll();
+        return $narudzba;
     }
 
     // CRUD - read
@@ -26,12 +59,12 @@ class Narudzba
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-            select a.sifra, a.broj_pracenja, a.datum_narudzbe, a.datum_isporuke, concat (b.ime,\' \',b.prezime) as korisnik
+            select a.sifra, a.broj_pracenja, a.datum_narudzbe, a.datum_isporuke, concat (b.ime,\' \',b.prezime) as korisnik, count(c.proizvod) as proizvoda
                 from narudzba a inner join korisnik b
                 on a.korisnik = b.sifra
                 left join stavke c
                 on a.sifra = c.narudzba
-            group by a.sifra, a.broj_pracenja, concat (b.ime,\' \',b.prezime), a.datum_narudzbe, a.datum_isporuke
+            group by a.sifra, concat (b.ime,\' \',b.prezime), a.broj_pracenja, a.datum_narudzbe, a.datum_isporuke
         
         ');
         $izraz->execute();
@@ -98,6 +131,39 @@ class Narudzba
         ');
         $izraz->execute([
             'sifra'=>$sifra
+        ]);
+    }
+
+    // Dodavanje proizvoda
+
+    public static function dodajproizvod($narudzba,$proizvod)
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+            insert into stavke (narudzba,proizvod) 
+            values (:narudzba,:proizvod)
+
+        ');
+        $izraz->execute([
+            'narudzba' => $narudzba,
+            'proizvod' => $proizvod
+        ]);
+    }
+
+    // Brisanje proizvoda
+
+    public static function obrisiproizvod($narudzba,$proizvod)
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+            delete from stavke where narudzba=:narudzba and proizvod=:proizvod
+
+        ');
+        $izraz->execute([
+            'narudzba' => $narudzba,
+            'proizvod' => $proizvod
         ]);
     }
 }

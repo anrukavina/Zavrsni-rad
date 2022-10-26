@@ -1,0 +1,23 @@
+<div class="callout" style="margin-top: 25px; height: 360px;">
+    <input type="text" id="uvjet" placeholder="Dio naziva proizvoda">
+
+    <div style="overflow: auto; max-height: 280px;">
+        <table>
+            <thead>
+                <th>Proizvod</th>
+                <th>Akcija</th>
+            </thead>
+            <tbody id="podatci">
+                <?php foreach($e->proizvodi as $p): ?>
+                    <tr>
+                        <td><?=$p->naziv?> <?=$p->cijena?>
+                            <a class="brisiproizvod" href="#" id="_p<?=$p->sifra?>">
+                                <i style="color: red;" class="step fi-page-delete size-36"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>

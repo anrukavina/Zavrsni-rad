@@ -1,0 +1,28 @@
+<form method="post" action="<?=App::config('url')?>kategorija/brisanje/<?=$kategorija->sifra?>">
+  <h4 class="text-center">Brisanje kategorije</h4>
+    <label>Naziv
+        <input disabled="disabled" type="text" name="naziv" value="<?=$kategorija->naziv?>">
+    </label>
+    <label>Opis
+        <input disabled="disabled" type="text" name="opis" value="<?=$kategorija->opis?>">
+    </label>
+
+  <?=$poruka?>
+
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 cell">
+        <a class="alert button expanded" 
+            href="<?=App::config('url')?>kategorija">Odustani</a>
+    </div>
+    <div class="large-6 cell">
+        <?php if($brisanje): ?>
+            <input type="hidden" name="obrisi" value="true" />
+            <input type="submit" class="button expanded" value="Obriši"></input>
+        <?php else: ?>
+            Kategorija se ne može obrisati jer se nalazi na jednom ili više proizvoda.
+        <?php endif;?>
+    </div>
+  </div>
+
+
+</form>

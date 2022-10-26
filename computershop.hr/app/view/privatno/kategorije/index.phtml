@@ -18,10 +18,18 @@
                         <i style="color: blue;" class="fi-page-edit"></i>
                     </a>
                     &nbsp;&nbsp;
-                    <a href="<?=App::config('url')?>kategorija/brisanje/<?=$e->sifra?>"
-                    onclick="return confirm('Sigurno želite obrisati kategoriju <?=$e->naziv?>'">
-                        <i style="color: red;" class="fi-page-delete"></i>
-                    </a>
+                    <?php if($e->proizvod==0): ?>
+                        <a onclick="return confirm('Sigurno obrisati <?=$e->prezime?>?');" 
+                        href="<?=App::config('url')?>kategorija/brisanje/<?=$e->sifra?>">
+                            <i style="color: red;" class="fi-page-delete"></i>
+                        </a>
+                        <?php else: ?>
+                            <a href="<?=App::config('url')?>kategorija/brisanje/<?=$e->sifra?>">
+                            <i style="color: gray;" 
+                            title="Kategorija se ne može obrisati jer se nalazi na jednom ili više proizvoda."
+                            class="fi-page-delete"></i>
+                        </a>
+                    <?php endif; ?>
                 </td>
         </tr>
     <?php endforeach; ?>

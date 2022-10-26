@@ -9,8 +9,10 @@ class ProizvodController extends AutorizacijaController
 
     public function index()
     {
+        $proizvodi = Proizvod::read();
+
         $this->view->render($this->phtmlDir . 'index', [
-            'entiteti'=>Proizvod::read()
+            'entiteti' => Proizvod::read()
         ]);
     }
 
@@ -106,6 +108,20 @@ class ProizvodController extends AutorizacijaController
 
     public function brisanje($sifra)
     {
+        $proizvod = Proizvod::readOne($sifra);
+        if($proizvod==null){
+            header('location: ' . App::config('url') . 'proizvod');
+        }
+        
+        if(!isset($_POST['obrisi'])){
+            $this->view->render($this->phtmlDir . 'delete', [
+                'proizvod' => $proizvod,
+                'brisanje' => Proizvod::brisanje($sifra),
+                'poruka' => 'Detalji proizvoda za brisanje'
+            ]);
+            return;
+        }
+                
         Proizvod::delete($sifra);
         header('location: ' . App::config('url') . 'proizvod');
     }
@@ -123,111 +139,11 @@ class ProizvodController extends AutorizacijaController
         return $kategorije;
     }
 
-    /* public function index()
+    public function trazi()
     {
-        $nf = new NumberFormatter("hr-HR", \NumberFormatter::DECIMAL);
-        $nf->setPattern('#,##0.00');
-        $proizvodi = Proizvod::read();
-        foreach($proizvodi as $p){
-            $p->cijena = $nf->format($p->cijena);
-            $p->tezina = $nf->format($p->tezina);
-        }
-
-
-        $this->view->render($this->phtmlDir . 'index', [
-            'entiteti' => $proizvodi    
-        ]);
-    }
-
-    public function novi()
-    {
-        $noviProizvod = Proizvod::create([
-            'naziv'=>'',
-            'vrsta'=>'',
-            'cijena'=>'',
-            'boja'=>'',
-            'tezina'=>'',
-            'kategorija'=>1
-        ]);
-        header('location:' . App::config('url') . 'proizvod/promjena/' . $noviProizvod);
-    }
-
-    public function promjena($sifra)
-    {
-        $kategorije = $this->ucitajKategorije();
-
-        if(!isset($_POST['naziv'])){
-
-            $e = Proizvod::readOne($sifra);
-            if($e = null){
-                header('location: ' . App::config('url') . 'proizvod');
-            }
-
-            $this->detalji($e,$kategorije, 'Unesite podatke');
+        if(!isset($_GET['term'])){
             return;
         }
-
-        $this->entitet = (object) $_POST;
-        $this->entitet->sifra=$sifra;
-
-        if($this->kontrola()){
-            Proizvod::update((array)$this->entitet);
-            header('location: ' . App::config('url') . 'proizvod');
-            return;
-        }
-
-        $this->detalji($this->entitet,$kategorije,$this->poruka);
+        echo json_encode(Proizvod::search($_GET['term'],$_GET['narudzba']));
     }
-
-    public function brisanje($sifra)
-    {
-        Proizvod::delete($sifra);
-        header('location: ' . App::config('url') . 'proizvod');
-    }
-
-    private function detalji($e,$kategorije,$poruka)
-    {
-        $this->view->render($this->phtmlDir . 'detalji', [
-            'e'=>$e,
-            'kategorije'=>$kategorije,
-            'poruka'=>'poruka'
-        ]);
-    }
-
-    private function ucitajKategorije()
-    {
-        $kategorije = [];
-        $s = new stdClass();
-        $s->sifra=0;
-        $s->naziv='Odaberi kategoriju';
-        $kategorije[]=$s;
-        foreach(Kategorija::read() as $kategorija){
-            $kategorije[]=$kategorija;
-        }
-        return $kategorije;
-    }
-
-    private function kontrola()
-    {
-        return $this->kontrolaNaziv() && $this->kontrolaVrsta();
-    }
-
-    private function kontrolaNaziv()
-    {
-        if(strlen($this->entitet->naziv)===0){
-            $this->poruka = 'Naziv obavezno';
-            return false;
-        }
-        return true;
-    }
-
-    private function kontrolaVrsta()
-    {
-        if(strlen($this->entitet->vrsta)===0){
-            $this->poruka = 'Vrsta obavezno';
-            return false;
-        }
-        return true;
-    } */
-
 }

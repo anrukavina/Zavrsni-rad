@@ -1,0 +1,17 @@
+<label for="broj_pracenja">Broj praćenja</label>
+    <input type="text" name="broj_pracenja" id="broj_pracenja" value="<?=$e->broj_pracenja?>"/>
+<label for="datum_narudzbe">Datum narudžbe</label>
+    <input type="date" name="datum_narudzbe" id="datum_narudzbe" value="<?=$e->datum_narudzbe?>"/>
+<label for="datum_isporuke">Datum isporuke</label>
+    <input type="date" name="datum_isporuke" id="datum_isporuke" value="<?=$e->datum_isporuke?>"/>
+<label for="korisnik">Korisnik</label>
+    <select name="korisnik" id="korisnik">
+        <?php foreach($korisnici as $k): ?>
+            <option
+            <?php if($e->korisnik == $k->sifra){
+                echo ' selected="selected"';
+            }
+            ?>
+            value="<?=$k->sifra?>"><?=$k->ime?> <?=$k->prezime?></option>
+        <?php endforeach; ?>
+    </select>

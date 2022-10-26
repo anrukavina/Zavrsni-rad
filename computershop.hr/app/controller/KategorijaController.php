@@ -80,6 +80,20 @@ class KategorijaController extends AutorizacijaController
 
     public function brisanje($sifra)
     {
+        $kategorija = Kategorija::readOne($sifra);
+        if($kategorija==null){
+            header('location: ' . App::config('url') . 'kategorija');
+        }
+        
+        if(!isset($_POST['obrisi'])){
+            $this->view->render($this->phtmlDir . 'delete', [
+                'kategorija' => $kategorija,
+                'brisanje' => Kategorija::brisanje($sifra),
+                'poruka' => 'Detalji kategorije za brisanje'
+            ]);
+            return;
+        }
+                
         Kategorija::delete($sifra);
         header('location: ' . App::config('url') . 'kategorija');
     }

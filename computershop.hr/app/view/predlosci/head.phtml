@@ -4,6 +4,7 @@
 <title><?php echo App::config('nazivApp'); ?></title>
 <link rel="stylesheet" href="<?php echo App::config('url'); ?>public/css/foundation.css">
 <link rel="stylesheet" href="<?php echo App::config('url'); ?>public/css/foundation-icons/foundation-icons.css">
+<?php if(isset($css)){echo $css;} ?>
 <link rel="stylesheet" href="<?php echo App::config('url'); ?>public/css/app.css">
 <link rel="apple-touch-icon" sizes="180x180" href="<?php echo App::config('url'); ?>public/favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="<?php echo App::config('url'); ?>public/favicon/favicon-32x32.png">

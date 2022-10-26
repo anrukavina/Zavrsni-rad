@@ -2,6 +2,21 @@
 
 class Kategorija 
 {
+    public static function brisanje($sifra)
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+            select count(*) from proizvod where kategorija=:sifra
+
+        ');
+        $izraz->execute([
+            'sifra' => $sifra
+        ]);
+        $ukupno = $izraz->fetchColumn();
+        return $ukupno==0;
+    }
+
     public static function readOne($sifra)
     {
         $veza = DB::getInstance();
@@ -24,8 +39,12 @@ class Kategorija
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-            select * from kategorija
-        
+            select a.sifra, a.naziv, a.opis, count(b.sifra) as proizvod from
+                kategorija a left join proizvod b
+                on a.sifra = b.kategorija 
+            group by a.sifra, a.naziv, a.opis 
+            order by 1,2
+       
         ');
         $izraz->execute();
         return $izraz->fetchAll();
