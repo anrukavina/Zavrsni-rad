@@ -1,50 +1,63 @@
-<a href="<?=App::config('url')?>korisnik/novi"
-    class="success button expanded">Dodaj novog korisnika</a>
+<div class="small-6 small-centered text-center columns">
+    <a href="<?=App::config('url')?>korisnik/novi" class="success button expanded">Dodaj novog korisnika</a>
+</div>
 
-<table>
-    <thead>
-        <tr>
-            <th>Ime i prezime</th>
-            <th>OIB</th>
-            <th>Adresa</th>
-            <th>Email</th>
-            <th>Datum rođenja</th>
-            <th>Broj telefona</th>
-            <th>Spol</th>
-            <th>Detaljnije</th>
-            <th>Akcija</th>
-        </tr>   
-    </thead>
-    <tbody>
-        <?php foreach($korisnici as $k): ?>
-            <tr>
-                <td><?=$k->ime?> <?=$k->prezime?></td>
-                <td><?=$k->oib?></td>
-                <td><?=$k->ulica?> <?=$k->kucni_broj . ','?> <?=$k->postanski_broj?> <?=$k->grad . ','?> <?=$k->drzava?></td>
-                <td><?=$k->email?></td>
-                <td><?=$k->datum_rodenja?></td>
-                <td><?=$k->broj_telefona?></td>
-                <td><?=$k->spol?></td>
-                <td></td>
-                <td>
-                    <a href="<?=App::config('url')?>korisnik/promjena/<?=$k->sifra?>">
-                        <i style="color: blue;" class="fi-page-edit"></i>
+<div class="grid-x grid-padding-x">
+    <?php foreach($korisnici as $k): ?>
+        <div class="large-4 cell" id="callout">
+            <div class="callout" style="text-align: center;">
+                <p><button class="btn" data-open="korisnik-modal">Detalji korisnika</button></p>
+                <div class="reveal" id="korisnik-modal" data-reveal>                        
+                    <p class="lead" style="text-align: center; font-weight: bold;">Detalji korisnika</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>OIB</th>
+                                <th>Email</th>
+                                <th>Datum rođenja</th>
+                                <th>Broj telefona</th>
+                                <th>Spol</th>
+                            </tr>   
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><?=$k->oib?></td>
+                                <td><?=$k->email?></td>
+                                <td><?=$k->datum_rodenja?></td>
+                                <td><?=$k->broj_telefona?></td>
+                                <td><?=$k->spol?></td>
+                            </tr>
+                        </tbody>
+                        </table>                    
+                    <button class="close-button" data-close aria-label="Close modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <hr/>
+                <h1 style="font-size: 1.5rem;"><?=$k->ime?> <?=$k->prezime?></h1>
+                <p class="podatci-korisnik"><?=$k->ulica?>
+                <?=$k->kucni_broj?><?php if(($k->ulica && $k->kucni_broj && $k->postanski_broj) != null): ?>,
+                <?php endif; ?>
+                <br/> 
+                <?=$k->postanski_broj?> <?=$k->grad?></p> 
+                <hr/>
+                <a href="<?=App::config('url')?>korisnik/promjena/<?=$k->sifra?>">
+                        <i style="color: blue;" class="fi-pencil"></i>
+                </a>
+                &nbsp;&nbsp;
+                <?php if($k->narudzba==0): ?>
+                    <a onclick="return confirm('Sigurno obrisati <?=$k->prezime?>?');" 
+                    href="<?=App::config('url')?>korisnik/brisanje/<?=$k->sifra?>">
+                        <span class="icons"><i style="color: red;" class="fi-trash"></i></span>
                     </a>
-                    &nbsp;&nbsp;
-                    <?php if($k->narudzba==0): ?>
-                        <a onclick="return confirm('Sigurno obrisati <?=$k->prezime?>?');" 
-                        href="<?=App::config('url')?>korisnik/brisanje/<?=$k->sifra?>">
-                            <i style="color: red;" class="fi-page-delete"></i>
-                        </a>
-                        <?php else: ?>
-                            <a href="<?=App::config('url')?>korisnik/brisanje/<?=$k->sifra?>">
-                            <i style="color: gray; cursor: pointer;" 
-                            title="Korisnik se ne može obrisati jer se nalazi na jednoj ili više narudžbi."
-                            class="fi-page-delete"></i>
-                        </a>
-                    <?php endif; ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+                    <?php else: ?>
+                        <a href="<?=App::config('url')?>korisnik/brisanje/<?=$k->sifra?>">
+                        <i style="color: gray; cursor: pointer;" 
+                        title="Korisnik se ne može obrisati jer se nalazi na jednoj ili više narudžbi."
+                        class="fi-trash"></i>
+                    </a>
+                <?php endif; ?>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>

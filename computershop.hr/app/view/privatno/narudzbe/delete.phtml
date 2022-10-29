@@ -1,0 +1,31 @@
+<form method="post" action="<?=App::config('url')?>narudzba/brisanje/<?=$narudzba->sifra?>">
+  <h4 class="text-center" style="margin-top: 20px;">Brisanje narudžbe</h4>
+
+    <div class="grid-x grid-padding-x">
+        <div class="large-4 cell" style="margin-top: 20px;">
+            <?php include_once 'opciPodaciDelete.phtml'; ?>
+        </div>
+        <div class="large-8 cell">
+            <?php include_once 'proizvodiDelete.phtml'; ?>
+        </div>
+    </div>
+
+  <?=$poruka?>
+
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 cell">
+        <a class="alert button expanded" 
+            href="<?=App::config('url')?>narudzba">Odustani</a>
+    </div>
+    <div class="large-6 cell">
+        <?php if($brisanje): ?>
+            <input type="hidden" name="obrisi" value="true" />
+            <input type="submit" class="success button expanded" value="Obriši"></input>
+        <?php else: ?>
+            Narudžba se ne može obrisati jer se nalazi na jednoj ili više stavki.
+        <?php endif;?>
+    </div>
+  </div>
+
+
+</form>

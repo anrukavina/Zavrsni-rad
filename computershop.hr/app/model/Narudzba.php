@@ -2,6 +2,21 @@
 
 class Narudzba
 {
+    public static function brisanje($sifra)
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+            select count(*) from stavke where narudzba=:sifra
+
+        ');
+        $izraz->execute([
+            'sifra' => $sifra
+        ]);
+        $ukupno = $izraz->fetchColumn();
+        return $ukupno==0;
+    }
+
     public static function readOne($sifra)
     {
         $veza = DB::getInstance();

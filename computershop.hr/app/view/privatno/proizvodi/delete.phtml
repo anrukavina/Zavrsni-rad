@@ -1,5 +1,5 @@
 <form method="post" action="<?=App::config('url')?>proizvod/brisanje/<?=$proizvod->sifra?>">
-  <h4 class="text-center">Brisanje proizvoda</h4>
+  <h4 class="text-center" style="margin-top: 10px;">Brisanje proizvoda</h4>
     <label>Naziv
         <input disabled="disabled" type="text" name="naziv" id="naziv" value="<?=$proizvod->naziv?>"/>
     </label>
@@ -38,7 +38,7 @@
     <div class="large-6 cell">
         <?php if($brisanje): ?>
             <input type="hidden" name="obrisi" value="true" />
-            <input type="submit" class="button expanded" value="Obriši"></input>
+            <input type="submit" class="success button expanded" value="Obriši"></input>
         <?php else: ?>
             Proizvod se ne može obrisati jer se nalazi na jednoj ili više stavki.
         <?php endif;?>

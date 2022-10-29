@@ -4,15 +4,23 @@
     <?php include_once 'predlosci/head.phtml'; ?>
   </head>
 <body>
-    <?php include_once 'predlosci/izbornik.phtml'; ?>
-    <div class="grid-container">
-      <div class="grid-x grid-padding-x">
-        <div class="large-12 cell" id="program">
-          <?php echo $sadrzaj; ?>
+    <header id="header">
+      <?php include_once 'predlosci/izbornik.phtml'; ?>
+    </header>
+
+    <main>
+      <div class="grid-container">
+        <div class="grid-x grid-padding-x">
+          <div class="large-12 cell" id="#program">
+            <?php echo $sadrzaj; ?>
+          </div>
         </div>
-      </div>     
-    </div>
-    <?php include_once 'predlosci/podnozje.phtml' ?>
+      </div>
+    </main>
+    
+    <footer>
+      <?php include_once 'predlosci/podnozje.phtml' ?>
+    </footer>
     <?php include_once 'predlosci/skripte.phtml'; ?>
   </body>
 </html>

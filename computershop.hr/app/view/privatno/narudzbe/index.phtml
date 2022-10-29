@@ -1,12 +1,12 @@
 <a href="<?=App::config('url')?>narudzba/nova" class="success button expanded">Dodaj novu narudžbu</a>
-<table>
+<table class="tablica">
     <thead>
         <tr>
             <th>Broj praćenja</th>
             <th>Datum narudžbe</th>
             <th>Datum isporuke</th>
             <th>Korisnik</th>
-            <th></th>
+            <th>Akcija</th>
         </tr>
     </thead>
     <tbody>
@@ -18,15 +18,21 @@
                 <td><?=$e->korisnik?></td>
                 <td>
                         <a href="<?=App::config('url')?>narudzba/promjena/<?=$e->sifra?>">
-                            <i style="color: blue;" class="fi-page-edit"></i>
+                            <i style="color: blue; font-size: 20px;" class="fi-pencil"></i>
                         </a>
                         &nbsp;&nbsp;
-                        <!-- <?php if($e->narudzba==0): ?> -->
+                        <?php if($e->stavke==0): ?>
                             <a onclick="return confirm('Sigurno želite obrisati narudžbu <?=$e->broj_pracenja?>?');"
                             href="<?=App::config('url')?>narudzba/brisanje/<?=$e->sifra?>">
-                                <i style="color: red; cursor: pointer;" class="fi-page-delete"></i>
+                                <i style="color: red; cursor: pointer; font-size: 20px;" class="fi-trash"></i>
                             </a>
-                        <!-- <?php endif; ?> -->
+                            <?php else: ?>
+                                <a href="<?=App::config('url')?>narudzba/brisanje/<?=$e->sifra?>">
+                                <i style="color: gray; font-size: 20px;" 
+                                title="Narudžba se ne može obrisati jer se nalazi na jednoj ili više stavki."
+                                class="fi-trash"></i>
+                            </a>
+                       <?php endif; ?>
                 </td>
             </tr>
         <?php endforeach; ?>

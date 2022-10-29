@@ -1,12 +1,12 @@
 <form method="post" action="<?=App::config('url')?>kategorija/promjena/<?=$e->sifra?>">
-    <h4 class="text-center">Detalji kategorije</h4>
+    <h4 class="text-center" style="margin-top: 10px;">Detalji kategorije</h4>
 
     <label>Naziv
-        <input type="text" name="naziv" value="<?=$e->naziv?>"/>
+        <input type="text" name="naziv" value="<?=$e->naziv?>" placeholder="Naziv"/>
     </label>
 
     <label>Opis
-        <input type="text" name="opis" value="<?=$e->opis?>"/>
+        <input type="text" name="opis" value="<?=$e->opis?>" placeholder="Opis"/>
     </label>
 
     <?=$poruka?>
@@ -16,7 +16,7 @@
             <a class="alert button expanded" href="<?=App::config('url')?>kategorija">Odustani</a>
         </div>
         <div class="large-6 cell">
-            <input type="submit" class="button expanded" value="Spremi"></input>
+            <input type="submit" class="success button expanded" value="Spremi"></input>
         </div>
     </div>
 </form>

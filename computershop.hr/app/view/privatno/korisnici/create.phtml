@@ -1,40 +1,40 @@
 <form method="post" action="<?=App::config('url')?>korisnik/novi">
-    <h4 class="text-center">Dodavanje novog korisnika</h4>
+    <h4 class="text-center" style="margin-top: 10px;">Dodavanje novog korisnika</h4>
     <label>Ime
-        <input type="text" name="ime" value="<?=$korisnik->ime?>">
+        <input type="text" name="ime" value="<?=$korisnik->ime?>" placeholder="Ime">
     </label>
     <label>Prezime
-        <input type="text" name="prezime" value="<?=$korisnik->prezime?>">
+        <input type="text" name="prezime" value="<?=$korisnik->prezime?>" placeholder="Prezime">
     </label>
     <label>OIB
-        <input type="number" name="oib" value="<?=$korisnik->oib?>">
+        <input type="number" name="oib" value="<?=$korisnik->oib?>" placeholder="OIB">
     </label>
-    <label>Država
+    <label class="drzava">Država
         <?php include_once 'drzaveDropdown.phtml'; ?>
     </label>
     <label>Grad
-        <input type="text" name="grad" value="<?=$korisnik->grad?>">
+        <input type="text" name="grad" value="<?=$korisnik->grad?>" placeholder="Grad">
     </label>
     <label>Poštanski broj
-        <input type="number" name="postanski_broj" value="<?=$korisnik->postanski_broj?>">
+        <input type="number" name="postanski_broj" value="<?=$korisnik->postanski_broj?>" placeholder="Poštanski broj">
     </label>
     <label>Ulica
-        <input type="text" name="ulica" value="<?=$korisnik->ulica?>">
+        <input type="text" name="ulica" value="<?=$korisnik->ulica?>" placeholder="Ulica">
     </label>
     <label>Kućni broj
-        <input type="text" name="kucni_broj" value="<?=$korisnik->kucni_broj?>">
+        <input type="text" name="kucni_broj" value="<?=$korisnik->kucni_broj?>" placeholder="Kućni broj">
     </label>
     <label>Email
-        <input type="email" name="email" value="<?=$korisnik->email?>">
+        <input type="email" name="email" value="<?=$korisnik->email?>" placeholder="Email">
     </label>
     <label>Datum rođenja
-        <input type="date" name="datum_rodenja" value="<?=$korisnik->datum_rodenja?>">
+        <input type="date" name="datum_rodenja" value="<?=$korisnik->datum_rodenja?>" placeholder="Datum rođenja">
     </label>
     <label>Broj telefona
-        <input type="text" name="broj_telefona" value="<?=$korisnik->broj_telefona?>">
+        <input type="text" name="broj_telefona" value="<?=$korisnik->broj_telefona?>" placeholder="Broj telefona">
     </label>
     <label>Spol
-        <input type="text" name="spol" value="<?=$korisnik->spol?>">
+        <input type="text" name="spol" value="<?=$korisnik->spol?>" placeholder="Spol">
     </label>
 
     <?=$poruka?>
@@ -44,7 +44,7 @@
             <a class="alert button expanded" href="<?=App::config('url')?>korisnik">Odustani</a>
         </div>
         <div class="cell large-6">
-            <input type="submit" class="button expanded" value="Dodaj"></input>  
+            <input type="submit" class="success button expanded" value="Dodaj"></input>  
         </div>
     </div>
 </form>

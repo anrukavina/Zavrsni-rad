@@ -1,21 +1,21 @@
 <form method="post" enctype="multipart/form-data" 
     action="<?=App::config('url')?>proizvod/promjena/<?=$e->sifra?>">
-<h4 class="text-center">Detalji proizvoda</h4>
+<h4 class="text-center" style="margin-top: 10px;">Detalji proizvoda</h4>
 
 <label>Naziv
-        <input type="text" name="naziv" id="naziv" value="<?=$e->naziv?>"/>
+        <input type="text" name="naziv" id="naziv" value="<?=$e->naziv?>" placeholder="Naziv"/>
 </label>
 <label>Vrsta
-    <input type="text" name="vrsta" value="<?=$e->vrsta?>"/>
+    <input type="text" name="vrsta" value="<?=$e->vrsta?>" placeholder="Vrsta"/>
 </label>
 <label>Cijena
-    <input type="text" name="cijena" value="<?=$e->cijena?>"/>
+    <input type="text" name="cijena" value="<?=$e->cijena?>" placeholder="Cijena"/>
 </label>
 <label>Boja
-    <input type="text" name="boja" value="<?=$e->boja?>"/>
+    <input type="text" name="boja" value="<?=$e->boja?>" placeholder="Boja"/>
 </label>
 <label>Tezina
-    <input type="text" name="tezina" value="<?=$e->tezina?>"/>
+    <input type="text" name="tezina" value="<?=$e->tezina?>" placeholder="Tezina"/>
 </label>
 
 <label>Kategorija</label>
@@ -34,7 +34,7 @@
     <input type="file" name="slika">
 </label>
 <img src="<?=$e->slika?>" alt="">
-
+</br>
 <?=$poruka?>
 
   <div class="grid-x grid-padding-x">
@@ -43,7 +43,7 @@
             href="<?=App::config('url')?>proizvod">Odustani</a>
     </div>
     <div class="large-6 cell">
-        <input type="submit" class="button expanded" value="Spremi"></input>
+        <input type="submit" class="success button expanded" value="Spremi"></input>
     </div>
   </div>
 

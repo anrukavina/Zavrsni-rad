@@ -158,6 +158,20 @@ class NarudzbaController extends AutorizacijaController
 
     public function brisanje($sifra)
     {
+        $narudzba = Narudzba::readOne($sifra);
+        if($narudzba==null){
+            header('location: ' . App::config('url') . 'narudzba');
+        }
+        
+        if(!isset($_POST['obrisi'])){
+            $this->view->render($this->phtmlDir . 'delete', [
+                'narudzba' => $narudzba,
+                'brisanje' => Narudzba::brisanje($sifra),
+                'poruka' => 'Detalji narudžbe za brisanje'
+            ]);
+            return;
+        }
+                
         Narudzba::delete($sifra);
         header('location: ' . App::config('url') . 'narudzba');
     }

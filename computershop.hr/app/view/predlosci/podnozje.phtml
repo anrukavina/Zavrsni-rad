@@ -1,8 +1,11 @@
 <div <?php 
 if(App::config('dev')){
-    echo 'style="background-color: red;"';
+    echo 'style="background-color: #1779ba; text-align: center;"';
+}else{
+    echo 'style="background-color: transparent; text-align: center;"';
 }
 ?> >
-    
+   
     &copy; <?php echo App::config('nazivApp'); ?>
+</div>
 </div>

@@ -1,12 +1,19 @@
-<form class="log-in-form" method="post" 
-action="<?=App::config('url') ?>login/autorizacija">
-  <h4 class="text-center">Prijava</h4>
-  <label>Email
-    <input type="email" name="email" value="<?=$email?>">
-  </label>
-  <label>Lozinka
-    <input type="password" name="password" placeholder="operater">
-  </label>
-  <?=$poruka?>
-  <p><input type="submit" class="button expanded" value="Log in"></input></p>
-</form>
+<div class="grid-x grid-padding-x">
+  <div class="large-12 cell">
+    <div class="callout" id="log-in-callout" style="text-align: center; width: 50%;">
+      <form method="post" class="log-in-form" method="post" 
+        action="<?=App::config('url') ?>login/autorizacija">
+        <h4 style="font-weight: bold;">Prijava</h4>
+        <br/>
+        <label>Email
+          <input class="login-input" style="width: 70%;" type="email" name="email" value="<?=$email?>" placeholder="operater@computershop.hr">
+        </label>
+        <label>Lozinka
+          <input class="login-input" style="width: 70%;" type="password" name="password" placeholder="operater">
+        </label>
+        <?=$poruka?>
+        <p><input type="submit" class="success button" value="Log in"></input></p>
+      </form>
+    </div>
+  </div>
+</div>

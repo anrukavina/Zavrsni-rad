@@ -1,5 +1,5 @@
 <form method="post" action="<?=App::config('url')?>korisnik/brisanje/<?=$korisnik->sifra?>">
-  <h4 class="text-center">Brisanje korisnika</h4>
+  <h4 class="text-center" style="margin-top: 10px;">Brisanje korisnika</h4>
   <label>Ime
         <input disabled="disabled" type="text" name="ime" value="<?=$korisnik->ime?>">
     </label>
@@ -47,7 +47,7 @@
     <div class="large-6 cell">
         <?php if($brisanje): ?>
             <input type="hidden" name="obrisi" value="true" />
-            <input type="submit" class="button expanded" value="Obriši"></input>
+            <input type="submit" class="success button expanded" value="Obriši"></input>
         <?php else: ?>
             Korisnik se ne može obrisati jer se nalazi na jednoj ili više narudžbi.
         <?php endif;?>

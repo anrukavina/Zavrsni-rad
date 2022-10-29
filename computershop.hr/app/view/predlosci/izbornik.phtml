@@ -1,5 +1,4 @@
 <?php /* https://get.foundation/sites/docs/responsive-navigation.html#responsive-toggle */ ?>
-
 <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
   <button class="menu-icon" type="button" data-toggle="example-menu"></button>
   <div class="title-bar-title">Menu</div>
@@ -26,6 +25,7 @@
   </div>
   <div class="top-bar-right">
     <ul class="menu">
+      <li><a href="<?= App::config('url') ?>dijagram">ER dijagram</a></li>
       <?php if(!App::auth()): ?>
         <li><a href="<?=App::config('url') ?>login/prijava">Prijava</a></li>
       <?php else: ?>

@@ -1,0 +1,46 @@
+<div class="callout" style="margin-top: 25px; height: 360px;">
+    <input disabled="disabled" type="text" id="uvjet" placeholder="Dio naziva proizvoda">
+
+    <div style="overflow: auto; max-height: 280px;">
+        <table>
+            <thead>
+                <th>Proizvod</th>
+                <th>Količina</th>
+                <th>Akcija</th>
+            </thead>
+            <tbody id="podatci">
+                <?php foreach($narudzba->proizvodi as $p): ?>
+                    <tr>
+                        <td><?=$p->naziv?></td>
+                        <td><?=$p->kolicina?></td>
+                        <td>
+                            <a class="brisiProizvod" href="#" id="p_<?=$p->sifra?>">
+                                <i style="color: red;" class="step fi-page-delete size-36"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="reveal" id="kolicinaModal" data-reveal>
+    <div style="max-height: 300px; overflow: auto;">
+        <p>Količina</p>
+        <input type="number" id="kolicina">
+    </div>
+
+    <div class="grid-x grid-padding-x">
+        <div class="large-6 cell">
+            <a class="alert button expanded" href="#" id="kolicinaOdustani">Odustani</a>
+        </div>
+        <div class="large-6 cell">
+            <a class="success button expanded" href="#" id="kolicinaSpremi">Spremi</a>
+        </div>
+    </div>
+
+    <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>

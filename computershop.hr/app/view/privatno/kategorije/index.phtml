@@ -1,11 +1,11 @@
 <a href="<?=App::config('url')?>kategorija/novi" class="success button expanded">Dodaj novu kategoriju</a>
 
-<table>
+<table class="tablica">
     <thead>
         <tr>
             <th>Naziv</th>
             <th>Opis</th>
-            <th></th>
+            <th>Akcija</th>
         </tr>
     </thead>
     <tbody>
@@ -15,22 +15,22 @@
             <td><?=$e->opis?></td>
             <td>
                     <a href="<?=App::config('url')?>kategorija/promjena/<?=$e->sifra?>">
-                        <i style="color: blue;" class="fi-page-edit"></i>
+                        <i style="color: blue; font-size: 20px;" class="fi-pencil"></i>
                     </a>
                     &nbsp;&nbsp;
                     <?php if($e->proizvod==0): ?>
-                        <a onclick="return confirm('Sigurno obrisati <?=$e->prezime?>?');" 
+                        <a onclick="return confirm('Sigurno obrisati <?=$e->naziv?>?');" 
                         href="<?=App::config('url')?>kategorija/brisanje/<?=$e->sifra?>">
-                            <i style="color: red;" class="fi-page-delete"></i>
+                            <i style="color: red; font-size: 20px;" class="fi-trash"></i>
                         </a>
                         <?php else: ?>
                             <a href="<?=App::config('url')?>kategorija/brisanje/<?=$e->sifra?>">
-                            <i style="color: gray;" 
+                            <i style="color: gray; font-size: 20px;" 
                             title="Kategorija se ne može obrisati jer se nalazi na jednom ili više proizvoda."
-                            class="fi-page-delete"></i>
+                            class="fi-trash"></i>
                         </a>
                     <?php endif; ?>
-                </td>
+            </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
